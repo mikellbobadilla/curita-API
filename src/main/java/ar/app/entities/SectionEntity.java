@@ -19,6 +19,6 @@ public class SectionEntity {
     private Long id;
     @Column(length = 25, nullable = false)
     private String name;
-    @Column(length = 50, nullable = false)
+    @Column(length = 50)
     private String observation;
 }

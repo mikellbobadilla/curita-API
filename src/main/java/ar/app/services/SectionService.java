@@ -1,5 +1,6 @@
 package ar.app.services;
 
+import ar.app.dto.CreateSectionDTO;
 import ar.app.entities.SectionEntity;
 import ar.app.repositories.SectionRepository;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Data;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 @AllArgsConstructor
@@ -19,15 +21,14 @@ public class SectionService {
     /* CRUD */
     /* Create, Read, Update, Delete */
     /* Create - POST */
-    public void createSection() {
+    public SectionEntity createSection(CreateSectionDTO entity) {
         SectionEntity section = SectionEntity.builder()
                 .id(null)
-                .name("Pasta Dental")
-                .observation("Esto es una puta mierda")
+                .name(entity.name())
+                .observation(entity.observation())
                 .build();
         
-        sectionRepository.save(section);
-        sectionRepository.flush();
+        return sectionRepository.saveAndFlush(section);
     }
 
     /* READ - GET */

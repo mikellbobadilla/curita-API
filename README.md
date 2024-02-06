@@ -15,3 +15,14 @@ Para iniciar este proyecto en modo producción, necesitas las siguientes variabl
 `DB_USERNAME`, `DB_PASSWORD` `DB_HOST` `APP_PROFILE`
 
 Si necesitas iniciar este proyecto en modo de desarrollo, solo necesitar usar el archivo compose.yml que se encuentra en la carpeta raíz del proyecto.
+
+## Tareas
+
+<!-- To Leila -->
+- Trabajar con la Entidad SectionEntity
+    - Eliminar los campos de las tablas que tienen el campo requerido
+- Desarrollar el servicio basico (CRUD)
+    - Crear los Recuros utilizando DTOS
+    - Generar los servicios
+    - Personalizar las respuestas correctamente
+    - Controlar las excepciones y errores que puedan ocurrir

@@ -1,8 +1,10 @@
 package ar.app.services.provider;
 
 import ar.app.dto.provider.ProviderRequest;
+import ar.app.dto.provider.ProviderResponse;
 import ar.app.entities.ProviderEntity;
 import ar.app.repositories.ProviderRepository;
+import ar.app.utils.MapperObject;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,20 +27,13 @@ public class ProviderService {
         return repository.findAll(pageable);
     }
 
-    public ProviderEntity create(ProviderRequest request) {
+    public ProviderResponse create(ProviderRequest request) throws IllegalAccessException {
 
-        ProviderEntity provider = ProviderEntity.builder()
-                .name(request.name())
-                .address(request.address())
-                .email(request.email())
-                .contactProvider(request.contactProvider())
-                .phone(request.phone())
-                .cuil(request.cuil())
-                .startOperations(request.startOperations())
-                .observation(request.observation())
-                .build();
+        MapperObject<ProviderEntity, ProviderRequest> mapper = new MapperObject<>();
+        ProviderEntity provider = mapper.mapData(new ProviderEntity(), request);
 
-        return repository.saveAndFlush(provider);
+        MapperObject<ProviderResponse, ProviderEntity> mapperResponse = new MapperObject<>();
+        return mapperResponse.mapData(new ProviderResponse(), repository.saveAndFlush(provider));
     }
 
     public ProviderEntity getBy(Long id) {

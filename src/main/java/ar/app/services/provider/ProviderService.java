@@ -33,12 +33,13 @@ public class ProviderService {
         ProviderEntity provider = mapper.mapData(new ProviderEntity(), request);
 
         MapperObject<ProviderResponse, ProviderEntity> mapperResponse = new MapperObject<>();
-        return mapperResponse.mapData(new ProviderResponse(), repository.saveAndFlush(provider));
+        return mapperResponse.mapData(new ProviderResponse(),
+        repository.saveAndFlush(provider));
     }
 
     public ProviderEntity getBy(Long id) {
         return repository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Provider not found!"));
+                .orElseThrow(() -> new RuntimeException("Provider not found!"));
     }
 
     public void update(Long id, ProviderRequest request) {

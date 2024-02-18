@@ -27,7 +27,7 @@ public class ProviderController {
     ) {
         return new ResponseEntity<>(service.getAll(page, size), HttpStatus.OK);
     }
-
+ 
     @PostMapping
     ResponseEntity<ProviderResponse> create(@RequestBody @Valid ProviderRequest request) throws IllegalAccessException {
 

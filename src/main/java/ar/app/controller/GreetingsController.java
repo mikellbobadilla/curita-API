@@ -1,4 +1,4 @@
-package ar.app.controllers;
+package ar.app.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

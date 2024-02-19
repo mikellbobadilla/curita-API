@@ -1,4 +1,4 @@
-package ar.app.exceptions.provider;
+package ar.app.exception.provider;
 
 public class ProviderException extends Exception {
 

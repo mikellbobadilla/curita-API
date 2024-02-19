@@ -1,4 +1,4 @@
-package ar.app.entities;
+package ar.app.model.section;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class SectionEntity {
+public class SectionModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

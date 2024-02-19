@@ -1,8 +1,8 @@
 package ar.app.advice.provider;
 
 import ar.app.advice.ErrorResponse;
-import ar.app.exceptions.provider.ProviderException;
-import ar.app.exceptions.provider.ProviderNotFountException;
+import ar.app.exception.provider.ProviderException;
+import ar.app.exception.provider.ProviderNotFountException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

@@ -1,4 +1,4 @@
-package ar.app.services;
+package ar.app.service;
 
 public interface CRUDService<T> {
 

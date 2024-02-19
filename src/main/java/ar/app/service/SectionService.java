@@ -1,15 +1,14 @@
-package ar.app.services;
+package ar.app.service;
 
 import ar.app.dto.CreateSectionDTO;
-import ar.app.entities.SectionEntity;
-import ar.app.repositories.SectionRepository;
+import ar.app.model.section.SectionModel;
+import ar.app.repository.section.SectionRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 @AllArgsConstructor
@@ -21,8 +20,8 @@ public class SectionService {
     /* CRUD */
     /* Create, Read, Update, Delete */
     /* Create - POST */
-    public SectionEntity createSection(CreateSectionDTO entity) {
-        SectionEntity section = SectionEntity.builder()
+    public SectionModel createSection(CreateSectionDTO entity) {
+        SectionModel section = SectionModel.builder()
                 .id(null)
                 .name(entity.name())
                 .observation(entity.observation())
@@ -32,7 +31,7 @@ public class SectionService {
     }
 
     /* READ - GET */
-    public List<SectionEntity> getAll() {
+    public List<SectionModel> getAll() {
         return sectionRepository.findAll();
     }
 

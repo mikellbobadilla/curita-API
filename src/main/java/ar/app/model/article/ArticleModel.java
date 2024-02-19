@@ -1,5 +1,7 @@
-package ar.app.entities;
+package ar.app.model.article;
 
+import ar.app.model.section.SectionModel;
+import ar.app.model.provider.ProviderModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +16,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Data 
 @Builder
-public class ArticleEntity {
+public class ArticleModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -31,11 +33,11 @@ public class ArticleEntity {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "provider_id", nullable = false)
-    private ProviderEntity provider;
+    private ProviderModel provider;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "section_id", nullable = false)
-    private SectionEntity section;
+    private SectionModel section;
 
     @Column(length = 50)
     private String observation;

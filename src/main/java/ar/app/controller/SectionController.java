@@ -1,8 +1,8 @@
-package ar.app.controllers;
+package ar.app.controller;
 
 
 import ar.app.dto.CreateSectionDTO;
-import ar.app.entities.SectionEntity;
+import ar.app.model.section.SectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ar.app.services.SectionService;
+import ar.app.service.SectionService;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
@@ -26,13 +26,13 @@ public class SectionController {
     private final SectionService service;
 
     @PostMapping
-    public ResponseEntity<SectionEntity> create(@RequestBody CreateSectionDTO dto) {
+    public ResponseEntity<SectionModel> create(@RequestBody CreateSectionDTO dto) {
         
         return new ResponseEntity<>(service.createSection(dto), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<SectionEntity>> getAll() {
+    public ResponseEntity<List<SectionModel>> getAll() {
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 

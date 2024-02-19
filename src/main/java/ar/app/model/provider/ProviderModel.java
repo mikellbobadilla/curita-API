@@ -1,4 +1,4 @@
-package ar.app.entities;
+package ar.app.model.provider;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,12 +14,12 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 @Builder
-public class ProviderEntity {
+public class ProviderModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(length = 25, nullable = false)
+    @Column(length = 25, nullable = false, unique = true)
     private String name;
     @Column(length = 50, nullable = false)
     private String address;

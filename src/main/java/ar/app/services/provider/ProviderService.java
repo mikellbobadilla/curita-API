@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class ProviderService {
 
     private final ProviderRepository repository;
+    private final MapperObject mapper;
 
     public Page<ProviderEntity> getAll(int page, int size) {
         --page;
@@ -27,14 +28,11 @@ public class ProviderService {
         return repository.findAll(pageable);
     }
 
-    public ProviderResponse create(ProviderRequest request) throws IllegalAccessException {
+    public ProviderResponse create(ProviderRequest request) {
 
-        MapperObject<ProviderEntity, ProviderRequest> mapper = new MapperObject<>();
-        ProviderEntity provider = mapper.mapData(new ProviderEntity(), request);
+        ProviderEntity provider = mapper.mapData(ProviderEntity.class, request);
 
-        MapperObject<ProviderResponse, ProviderEntity> mapperResponse = new MapperObject<>();
-        return mapperResponse.mapData(new ProviderResponse(),
-        repository.saveAndFlush(provider));
+        return mapper.mapData(ProviderResponse.class, repository.saveAndFlush(provider));
     }
 
     public ProviderEntity getBy(Long id) {
@@ -42,20 +40,18 @@ public class ProviderService {
                 .orElseThrow(() -> new RuntimeException("Provider not found!"));
     }
 
-    public void update(Long id, ProviderRequest request) {
+    public void update(Long id, ProviderRequest request) throws IllegalAccessException {
         ProviderEntity provider = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Provider not found"));
+        repository.saveAndFlush(mapper.mapData(provider, request));
+    }
 
-        provider.setName(request.name());
-        provider.setAddress(request.address());
-        provider.setEmail(request.email());
-        provider.setContactProvider(request.contactProvider());
-        provider.setPhone(request.phone());
-        provider.setCuil(request.cuil());
-        provider.setStartOperations(request.startOperations());
-        provider.setObservation(request.observation());
-
+    public ProviderResponse partialUpdate(Long id, ProviderRequest request) throws IllegalAccessException {
+        ProviderEntity provider = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Provider not found"));
+        provider = mapper.mapData(provider, request);
         repository.saveAndFlush(provider);
+        return mapper.mapData(ProviderResponse.class, provider);
     }
 
     public void deleteBy(Long id) {

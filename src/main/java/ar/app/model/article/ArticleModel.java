@@ -1,7 +1,7 @@
 package ar.app.model.article;
 
-import ar.app.model.section.SectionModel;
 import ar.app.model.provider.ProviderModel;
+import ar.app.model.section.SectionModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

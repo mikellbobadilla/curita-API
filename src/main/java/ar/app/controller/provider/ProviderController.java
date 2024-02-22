@@ -23,8 +23,7 @@ public class ProviderController {
     @GetMapping
     ResponseEntity<PageProviders> getAll(
             @RequestParam(defaultValue = "1") int page,
-            @RequestParam(defaultValue = "10") int size
-    ) {
+            @RequestParam(defaultValue = "10") int size) throws ProviderException {
         return new ResponseEntity<>(service.getAll(page, size), HttpStatus.OK);
     }
 
@@ -34,18 +33,20 @@ public class ProviderController {
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<ProviderModel> get(@PathVariable Long id) throws ProviderNotFountException {
+    ResponseEntity<ProviderResponse> get(@PathVariable Long id) throws ProviderNotFountException {
         return new ResponseEntity<>(service.getBy(id), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<Void> update(@PathVariable Long id, @RequestBody @Valid ProviderRequest request) throws IllegalAccessException, ProviderNotFountException {
+    ResponseEntity<Void> update(@PathVariable Long id, @RequestBody @Valid ProviderRequest request)
+            throws IllegalAccessException, ProviderNotFountException {
         service.update(id, request);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PatchMapping("/{id}")
-    ResponseEntity<ProviderResponse> partialUpdate(@PathVariable Long id, @RequestBody @Valid ProviderRequest request) throws IllegalAccessException, ProviderNotFountException {
+    ResponseEntity<ProviderResponse> partialUpdate(@PathVariable Long id, @RequestBody @Valid ProviderRequest request)
+            throws IllegalAccessException, ProviderNotFountException {
         return new ResponseEntity<>(service.partialUpdate(id, request), HttpStatus.OK);
     }
 

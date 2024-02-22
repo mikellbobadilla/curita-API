@@ -24,10 +24,10 @@ public class ProviderService {
     private final MapperObject mapper;
 
     /* Todo: Add custom exception */
-    public PageProviders getAll(int page, int size) {
+    public PageProviders getAll(int page, int size) throws ProviderException {
         --page;
         if (page < 0) {
-            throw new RuntimeException("Page cannot be less than 1");
+            throw new ProviderException("Page cannot be less than 1");
         }
 
         Pageable pageable = PageRequest.of(page, size);
@@ -46,9 +46,11 @@ public class ProviderService {
     }
 
     /* Todo: Change type return */
-    public ProviderModel getBy(Long id) throws ProviderNotFountException {
-        return repository.findById(id)
+    public ProviderResponse getBy(Long id) throws ProviderNotFountException {
+        ProviderModel provider = repository.findById(id)
                 .orElseThrow(() -> new ProviderNotFountException("Provider not found!"));
+
+        return mapper.mapData(ProviderResponse.class, provider);
     }
 
     public void update(Long id, ProviderRequest request) throws IllegalAccessException, ProviderNotFountException {
@@ -57,7 +59,8 @@ public class ProviderService {
         repository.saveAndFlush(mapper.mapData(provider, request));
     }
 
-    public ProviderResponse partialUpdate(Long id, ProviderRequest request) throws IllegalAccessException, ProviderNotFountException {
+    public ProviderResponse partialUpdate(Long id, ProviderRequest request)
+            throws IllegalAccessException, ProviderNotFountException {
         ProviderModel provider = repository.findById(id)
                 .orElseThrow(() -> new ProviderNotFountException("Provider not found"));
         provider = mapper.mapData(provider, request);

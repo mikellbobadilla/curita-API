@@ -5,7 +5,6 @@ import ar.app.dto.provider.ProviderRequest;
 import ar.app.dto.provider.ProviderResponse;
 import ar.app.exception.provider.ProviderException;
 import ar.app.exception.provider.ProviderNotFountException;
-import ar.app.model.provider.ProviderModel;
 import ar.app.service.provider.ProviderService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

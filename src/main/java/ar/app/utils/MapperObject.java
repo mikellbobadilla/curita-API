@@ -6,6 +6,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,7 +27,7 @@ public class MapperObject {
         try {
             return constructor.newInstance(arguments);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException exc) {
-            if (exc instanceof InstantiationException){
+            if (exc instanceof InstantiationException) {
                 System.err.println("Can't create a new instance: " + exc.getMessage());
             } else if (exc instanceof IllegalAccessException) {
                 System.err.println("Application tries to reflectively create an instance: " + exc.getMessage());
@@ -44,7 +45,7 @@ public class MapperObject {
 
         if (target.isRecord()) {
             int count = 0;
-            for (Field sourceField: sourceFields) {
+            for (Field sourceField : sourceFields) {
                 Object value = null;
                 try {
                     Field targetField = target.getDeclaredField(sourceField.getName());
@@ -81,7 +82,7 @@ public class MapperObject {
                     sourceField.setAccessible(false);
 
                 } catch (NoSuchFieldException | IllegalAccessException exc) {
-                    if (exc instanceof NoSuchFieldException){
+                    if (exc instanceof NoSuchFieldException) {
                         continue;
                     } else
                         throw new RuntimeException(exc);
@@ -147,11 +148,21 @@ public class MapperObject {
                         targetField.set(target, parseDateToString((Date) value));
                     }
 
+                } else if (isMatchString(targetField) && isMatchBigDecimal(sourceField)) {
+                    Object value = sourceField.get(source);
+                    if (value != null) {
+                        targetField.set(target, parseBigDecimalToString((BigDecimal) value));
+                    }
+                } else if (isMatchBigDecimal(targetField) && isMatchString(sourceField)) {
+                    Object value = sourceField.get(source);
+                    if (value != null) {
+                        targetField.set(target, parseStringToBigDecimal((String) value));
+                    }
                 }
                 targetField.setAccessible(false);
                 sourceField.setAccessible(false);
             } catch (NoSuchFieldException e) {
-                throw new RuntimeException(e);
+                continue;
             }
         }
         return target;
@@ -159,14 +170,6 @@ public class MapperObject {
 
     private Field[] getFields(Class<?> clazz) {
         return clazz.getDeclaredFields();
-    }
-
-    private String getProp(Field field) {
-        return field.getName();
-    }
-
-    private String getType(Field field) {
-        return field.getType().getName();
     }
 
     private boolean isMatchDate(Field field) {
@@ -198,5 +201,13 @@ public class MapperObject {
             /* Todo: Create DateFormat Exception to response client */
             throw new RuntimeException(exc);
         }
+    }
+
+    private BigDecimal parseStringToBigDecimal(String value) {
+        return new BigDecimal(value).setScale(2, RoundingMode.HALF_UP);
+    }
+
+    private String parseBigDecimalToString(BigDecimal value) {
+        return value.setScale(2, RoundingMode.HALF_UP).toPlainString();
     }
 }

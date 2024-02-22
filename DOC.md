@@ -1,6 +1,7 @@
 # API-Rest Curita
 
-Es un sistema de administración para perfumerías que venden todo tipo de artículos conocídos cómo (Jabones, Shampoo para el cabello, Cepillos de dientes, etc.).
+Es un sistema de administración para perfumerías que venden todo tipo de artículos conocídos cómo (Jabones, Shampoo para
+el cabello, Cepillos de dientes, etc.).
 
 ## Use Case
 
@@ -26,7 +27,6 @@ Es un sistema de administración para perfumerías que venden todo tipo de artí
 | section_id  | BIGINT              | Section id        | required, relationship |
 | observation | TEXT(50)            | Item observation  |                        |
 
-
 ***Provider***
 
 | Field Name       | Type                | Description       | Observation      |
@@ -43,8 +43,8 @@ Es un sistema de administración para perfumerías que venden todo tipo de artí
 
 ***Section***
 
-| Field Name       | Type                | Description       | Observation |
-|------------------|---------------------|-------------------|-------------|
-| id               | BIGINT AUTO_NUMERIC | Identify the item | primary key |
-| name             | VARCHAR(25)         | Item name         | Required    |
-| observation      | TEXT(50)            | Item observation  |             |
+| Field Name  | Type                | Description       | Observation |
+|-------------|---------------------|-------------------|-------------|
+| id          | BIGINT AUTO_NUMERIC | Identify the item | primary key |
+| name        | VARCHAR(25)         | Item name         | Required    |
+| observation | TEXT(50)            | Item observation  |             |

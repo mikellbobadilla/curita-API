@@ -19,7 +19,7 @@ public class GreetingsController {
         try {
             // Aqui va la logica de negocio
             throw new Exception("Error de negocio");
-        } catch(Exception exc) {
+        } catch (Exception exc) {
             // Aqui va la logica de manejo de errores
             return new ResponseEntity<>(Map.of("error", "Hay un problema!" + exc.getMessage()), HttpStatus.BAD_REQUEST);
         }
@@ -27,6 +27,7 @@ public class GreetingsController {
 
     /**
      * Dentro de la salida de datos de Java. Tienes lo que es la salida estandar y lo que es la salid por flujo
+     *
      * @return
      */
     @GetMapping("/despacito")
@@ -37,6 +38,7 @@ public class GreetingsController {
 
     /**
      * Crear un recurso en el servidor
+     *
      * @return
      */
     @PostMapping("/create")

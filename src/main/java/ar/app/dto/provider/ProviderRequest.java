@@ -5,7 +5,7 @@ import org.hibernate.validator.constraints.Length;
 
 public record ProviderRequest(
         @Length(min = 3, max = 25, message = "Name must be between 3 and 25 characters")
-        @Pattern(regexp = "^\\p{L}+$", message = "Name must be only letters")
+        @Pattern(regexp = "^[\\p{L}\\s\\p{P}\\p{M}!]+$", message = "Name must be only letters")
         String name,
         @Pattern(regexp = "^[a-zA-Z0-9\\s\\.,#-]+$", message = "The provided address is not valid. Please ensure it is in the correct format.")
         String address,

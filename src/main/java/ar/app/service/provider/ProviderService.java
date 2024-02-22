@@ -23,6 +23,7 @@ public class ProviderService {
     private final ProviderRepository repository;
     private final MapperObject mapper;
 
+    /* Todo: Add custom exception */
     public PageProviders getAll(int page, int size) {
         --page;
         if (page < 0) {
@@ -44,6 +45,7 @@ public class ProviderService {
         return mapper.mapData(ProviderResponse.class, repository.saveAndFlush(provider));
     }
 
+    /* Todo: Change type return */
     public ProviderModel getBy(Long id) throws ProviderNotFountException {
         return repository.findById(id)
                 .orElseThrow(() -> new ProviderNotFountException("Provider not found!"));

@@ -1,7 +1,7 @@
 {
-    "recommendations": [
-        "vmware.vscode-boot-dev-pack",
-        "vscjava.vscode-java-pack",
-        "redhat.java"
-    ]
+  "recommendations": [
+    "vmware.vscode-boot-dev-pack",
+    "vscjava.vscode-java-pack",
+    "redhat.java"
+  ]
 }

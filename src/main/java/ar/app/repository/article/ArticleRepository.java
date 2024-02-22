@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ArticleRepository extends JpaRepository<ArticleModel, Long> {
+
+    boolean existsByBarcode(String barcode);
+
+    boolean existsByBarcodeAndIdNot(String barcode, Long id);
 }
